@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %} 
+{% extends 'base.html' %} {% block content %}
 <div class="content">
     <div class="card card-body">
         <div class="card card-body">
@@ -10,7 +10,33 @@
         <p class="article-content"><strong>Designation:</strong> {{ client.designation }}</p>
         <p class="article-content"><strong>Phone:</strong> {{ client.phone }}</p>
         <p class="article-content"><strong>Email:</strong> {{ client.email }}</p>
-        <p class="article-content"><strong>Number of sites:</strong> {{ client.num_of_site }}</p>
+        <p class="article-content"><strong>Number of sites:</strong> {{ site..num_of_site }}</p>
     </div>
+    <div>
+        <table class="table table-sm">
+            <tr>
+                <th>Clients</th>
+                <th>Branch</th>
+                <th>Address</th>
+                <th>State</th>
+                <th>Region</th>
+                <th>Contact Person</th>
+                <th>Contact Number</th>
+                <th>Status</th>
+            </tr>
+            {% for site in sites %}
+            <tr>
+                <td>{{site.client}}</td>
+                <td>{{site.branch}}</td>
+                <td>{{site.address}}</td>
+                <td>{{site.state}}</td>
+                <td>{{site.region}}</td>
+                <td>{{site.contact_person}}</td>
+                <td>{{site.contact_num}}</td>
+                <td>{{site.status}}</td>
+            </tr>
+            {% endfor %}
+    </div>
+
 </div>
- {% endblock %}
+{% endblock %}

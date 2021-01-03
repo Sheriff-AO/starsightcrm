@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Client
+from .models import *
 
 # Create your views here.
 
@@ -17,5 +17,19 @@ def client(request):
 
 def clientDetail(request, pk):
     client = Client.objects.get(id=pk)
-    context = {'client':client}
-    return render(request, 'audits/detail.html', context)   
+    sites = Site.objects.filter(client=client)
+    total_site = Site.objects.filter(client=client).count()
+    context = {
+        'client':client,
+        'sites': sites,
+        'total_site': total_site
+        }
+    return render(request, 'audits/detail.html', context) 
+
+
+def allSite(request):
+    sites = Site.objects.all()
+    context = {
+        'sites': sites
+    }
+    return render(request, 'audits/site.html', context)  

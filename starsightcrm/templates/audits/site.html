@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block content %}
+
+
+<hr>
+<div class="">
+    <table class="table table-sm">
+        <tr>
+            <th>Clients</th>
+            <th>Branch</th>
+            <th>Address</th>
+            <th>State</th>
+            <th>Region</th>
+            <th>Contact Person</th>
+            <th>Contact Number</th>
+            <th>Status</th>
+        </tr>
+        {% for site in sites %}
+        <tr>
+            <td>{{site.client}}</td>
+            <td>{{site.branch}}</td>
+            <td>{{site.address}}</td>
+            <td>{{site.state}}</td>
+            <td>{{site.region}}</td>
+            <td>{{site.contact_person}}</td>
+            <td>{{site.contact_num}}</td>
+            <td>{{site.status}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

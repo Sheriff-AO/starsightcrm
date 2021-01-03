@@ -22,3 +22,26 @@ class Client(models.Model):
 
     def __str__(self):
         return f'{self.category}: {self.name}'
+
+class Site(models.Model):
+    STATUS = (
+        ('Scheduled for Audit', 'Scheduled for Audit'),
+        ('Scheduled for Data-logging', 'Scheduled for Data-logging'),
+        ('Scheduled for Audit & Data-logging', 'Scheduled for Audit & Data-logging'),
+        ('Pending Schedule', 'Pending Schedule'),
+        ('Audited', 'Audited'),
+        ('Data-logged', 'Data-logged'),
+        ('Audited & Data-logged', 'Audited & Data-logged'),
+    )
+    client = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
+    branch = models.CharField(max_length=50, null=True)
+    address = models.TextField(max_length =200, null=True)
+    state = models.CharField(max_length=20, null=True)
+    region = models.CharField(max_length=4, null=True)
+    contact_person = models.CharField(max_length=100, null=True)
+    contact_num = models.CharField(max_length=16, null=True)
+    status = models.CharField(max_length=100, null=True, choices=STATUS)
+    date_recv = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.client} - {self.branch}'
