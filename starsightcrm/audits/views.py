@@ -24,7 +24,7 @@ def clientDetail(request, pk):
         'sites': sites,
         'total_site': total_site
         }
-    return render(request, 'audits/detail.html', context) 
+    return render(request, 'audits/clientDetail.html', context) 
 
 
 def allSite(request):
@@ -32,4 +32,20 @@ def allSite(request):
     context = {
         'sites': sites
     }
-    return render(request, 'audits/site.html', context)  
+    return render(request, 'audits/site.html', context) 
+
+
+def vendor(request):
+    vendors = Vendor.objects.all()
+    context = {
+        'vendors': vendors
+        }
+    return render(request, 'audits/vendor.html', context) 
+
+
+def vendorDetail(request, pk):
+    vendor = Vendor.objects.get(id=pk)
+    context = {
+        'vendor': vendor
+        }
+    return render(request, 'audits/vendorDetail.html', context) 

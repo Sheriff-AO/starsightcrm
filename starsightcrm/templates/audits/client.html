@@ -1,5 +1,7 @@
-{% extends 'base.html' %} {% block content %} {% for client in clients %}
+{% extends 'base.html' %} {% block content %}
+
 <div class="content">
+    {% for client in clients %}
     <div class="card card-body">
         <div class="card card-body">
             <a class="mr-2" href="#"><strong>User:</strong> {{ client.user }}</a>
@@ -12,5 +14,7 @@
         <p class="article-content"><strong>Email:</strong> {{ client.email }}</p>
         <p class="article-content"><strong>Number of sites:</strong> {{ client.num_of_site }}</p>
     </div>
+    {% endfor %}
 </div>
-{% endfor %} {% endblock %}
+
+{% endblock %}

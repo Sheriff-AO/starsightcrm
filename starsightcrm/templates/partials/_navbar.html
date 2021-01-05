@@ -1,7 +1,26 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a href=""><img id="logo" src="{% static 'images/slogo.png' %}" alt=""></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- 
 <nav class="navbar navbar-dark bg-secondary mb-4">
     <div class="container">
-        <a id="nav" href="{% url 'index' %}" class="navbar-brand">CRM</a>
+
+        <a id="nav" href="" class="navbar-brand">CRM</a>
         <a id="nav" href="#" class="navbar-brand">About</a>
         <a id="nav" href="#" class="navbar-brand">Contact</a>
     </div>
-</nav>
+</nav> -->

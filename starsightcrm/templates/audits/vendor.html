@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="content">
+    {% for vendor in vendors %}
+    <div class="card card-body">
+        <div class="card card-body">
+         <h2><a class="article-title" href="{% url 'audits:vendor-detail' vendor.id %}"><strong>Vendor:</strong> {{ vendor.name }}</a></h2>
+        <p class="article-content"><strong>Representative:</strong> {{ vendor.rep_name }}</p>
+        <p class="article-content"><strong>Designation:</strong> {{ vendor.designation }}</p>
+        <p class="article-content"><strong>Contact Number:</strong> {{ vendor.contact_number }}</p>
+        <p class="article-content"><strong>Email:</strong> {{ vendor.email }}</p>
+        <p class="article-content"><strong>Sites:</strong> {{ vendor.site.name }}</p>    
+        </div>
+       
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock  %}

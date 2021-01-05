@@ -21,7 +21,7 @@ class Client(models.Model):
 
 
     def __str__(self):
-        return f'{self.category}: {self.name}'
+        return f'{self.name}'
 
 class Site(models.Model):
     STATUS = (
@@ -39,9 +39,23 @@ class Site(models.Model):
     state = models.CharField(max_length=20, null=True)
     region = models.CharField(max_length=4, null=True)
     contact_person = models.CharField(max_length=100, null=True)
+    designation = models.CharField(max_length=100, null=True)
     contact_num = models.CharField(max_length=16, null=True)
     status = models.CharField(max_length=100, null=True, choices=STATUS)
     date_recv = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f'{self.client} - {self.branch}'
+
+
+class Vendor(models.Model):
+    site = models.ManyToManyField(Site, null=True)
+    name = models.CharField(max_length=100, null=True)
+    rep_name = models.CharField(max_length=100, null=True)
+    designation = models.CharField(max_length=100, null=True)
+    contact_number = models.CharField(max_length=16, null=True)
+    email = models.EmailField(max_length=100, null=True)
+
+    def __str__(self):
+        return self.name
+
