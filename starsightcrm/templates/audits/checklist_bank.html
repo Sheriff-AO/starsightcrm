@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% load crispy_forms_tags %} {% block content %}
+<div class="form-group-lg">
+    <form class="form-control" action="" method="POST">
+        <div class="form-group">
+            {% csrf_token %} {{form|crispy}}
+            <a class="btn btn-outline-info btn-sm" href="">Return Back</a>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

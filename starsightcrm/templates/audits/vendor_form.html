@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div class="content-section">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group" class="uniForm">
+      <legend class="border-bottom mb-4">New Vendor</legend>
+      {{ form.as_p }}
+    </fieldset>
+    <div class="form-group">
+      <a class="btn btn-outline-info btn-sm" href="{% url 'audits:vendor' %}">Return Back</a>
+      <button class="btn btn-outline-info btn-sm" type="submit">Create</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

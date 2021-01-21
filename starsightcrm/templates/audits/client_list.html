@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="content">
+    <a class="btn btn-secondary btn-sm" href="{% url 'audits:create-client' %}">Create Client</a> {% for client in clients %}
+
+
+
+    <div class="card card-body">
+
+        <div class="card card-body">
+            <a class="mr-2" href="#"><strong>User:</strong> {{ client.user }}</a>
+            <small class="text-muted"><strong>Date Created:</strong> {{ client.date_created|date:"F d, Y"}}</small>
+        </div>
+        <h2><a class="article-title" href="{% url 'audits:client-detail' client.id %}"><strong>Client:</strong> {{ client.name }}</a></h2>
+        <p class="article-content"><strong>Contact:</strong> {{ client.rep_name }}</p>
+        <p class="article-content"><strong>Designation:</strong> {{ client.designation }}</p>
+        <p class="article-content"><strong>Phone:</strong> {{ client.phone }}</p>
+        <p class="article-content"><strong>Email:</strong> {{ client.email }}</p>
+        <p class="article-content"><strong>Number of sites:</strong> {{ client.num_of_site }}</p>
+        <div>
+            <a class="btn btn-primary btn-sm" href="{% url 'audits:update-client' client.id %}">Update Client</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'audits:delete-client' client.id %}">Delete Client</a>
+        </div>
+
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

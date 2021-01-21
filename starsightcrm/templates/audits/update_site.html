@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %}
+<form action="" method="POST">
+    {% csrf_token %} {{ form.as_p }}
+
+    <a class="btn btn-outline-info btn-sm" href="{% url 'audits:site' %}">Return Back</a>
+    <input type="submit" value="Save">
+</form>
+
+{% endblock %}

@@ -1,8 +1,14 @@
 {% extends 'base.html' %} {% block content %}
+
 <div class="card text-center">
-    <div class="card-body">
-        <h1>Welcome to Starsight crm</h1>
-        <a class="btn btn-dark btn-sm" href="{% url 'audits:index' %}">Go to Audits</a>
-    </div>
+  <div class="card-body">
+    <h1>Welcome to Starsight crm</h1>
+    {% if request.user.is_authenticated and request.user.is_staff %}
+    <a class="btn btn-dark btn-sm" href="{% url 'audits:index' %}"
+      >Go to Audits</a
+    >
+    {% endif %}
+  </div>
 </div>
+
 {% endblock %}

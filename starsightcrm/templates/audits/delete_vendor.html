@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+
+<p>Are you sure you want to delete "{{vendor}}"?</p>
+<form action="{% url 'audits:delete-vendor' vendor.id %}" method="POST">
+    {% csrf_token %}
+
+    <a class="btn btn-danger btn-sm" href="{% url 'audits:vendor' %}">Cancel</a>
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock %}

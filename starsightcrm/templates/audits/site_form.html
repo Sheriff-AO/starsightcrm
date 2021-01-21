@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+<form action="" method="POST">
+    {% csrf_token %} {{form|crispy}}
+
+    <a class="btn btn-outline-info btn-sm" href="{% url 'audits:site' %}">Return Back</a>
+    <input type="submit" value="Sumbit">
+</form>
+
+{% endblock %}
