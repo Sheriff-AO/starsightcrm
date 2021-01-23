@@ -1,2 +1,8 @@
 venv
 venv3
+
+__pycache__
+# Ignore all Media Files
+media/
+# Except the default image
+!media/default.jpg
