@@ -29,19 +29,53 @@ admin.site.register(Customer)
 
 class ChecklistResource(resources.ModelResource):
     def get_export_headers(self):
-        print(self.get_export_fields)
         headers = []
-        for field in self.get_fields():
-            model_fields = self.Meta.model._meta.get_fields()
-            header = next((x.verbose_name for x in model_fields if x.name ==
-                           field.column_name), field.column_name)
+        for field in self.get_export_fields():
+            header = self.get_verbose_name(self.Meta.model, field.column_name)
             headers.append(header)
         return headers
 
+    def get_verbose_name(self, model, column):
+        """
+        Takes a model and a particular column and returns a the verbose name for that column
+        even when the column contains a foreign key to another model.
+        """
+        fields = column.split('__')
+
+        for field_name in fields[:-1]:
+            field = model._meta.get_field(field_name)
+
+            if field.many_to_one:
+                model = field.foreign_related_fields[0].model
+            elif field.many_to_many or field.one_to_one or field.one_to_many:
+                model = field.related_model
+            else:
+                raise ValueError('Incorrect column')
+
+        return model._meta.get_field(fields[-1]).verbose_name
+
+
     class Meta:
         model = Checklist
-        fields = ('cooling_and_power_information__location',
-                  'cooling_and_power_information__existing_qty_standing_unit')
+        def genarate_fields_including_related_model(model):
+            fields_in_model = []
+            for field in model._meta.get_fields():
+                if field.many_to_one:
+                    model = field.foreign_related_fields[0].model
+                if field.many_to_many or field.one_to_one or field.one_to_many:
+                    model = field.related_model
+                else:
+                    # field is not a link to another model
+                    fields_in_model.append(field.name)
+                    continue
+                fields_in_model += [f'{field.name}__{f.name}' for f in model._meta.get_fields()[1:] if f.name != 'id']
+            return tuple(fields_in_model)
+
+        fields = genarate_fields_including_related_model(model)
+        exclude = ('id',)
+
+
+
 
 
 @admin.register(Checklist)
