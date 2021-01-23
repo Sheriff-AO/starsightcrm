@@ -103,7 +103,7 @@ class CustomerInformation(models.Model):
     gps_coordinate = models.CharField(max_length=18, null=True, blank=True)
     contact_person = models.CharField(max_length=100, null=True, blank=True)
     contact_number = models.CharField(max_length=18, null=True, blank=True)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateTimeField()
 
 
 class MountingPlane(models.Model):
@@ -277,4 +277,4 @@ class Checklist(models.Model):
     customer = models.OneToOneField("audits.Customer", verbose_name=_(
         "Customer Representative"), on_delete=models.CASCADE)
     general_comment = models.OneToOneField("audits.GeneralComment", verbose_name=_(
-        "General Comment: "), on_delete=models.CASCADE)
+        "General Comment"), on_delete=models.CASCADE)

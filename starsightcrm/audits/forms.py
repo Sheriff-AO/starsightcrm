@@ -1,4 +1,4 @@
-from django.forms import forms
+from django.forms import forms, widgets
 from django.contrib.auth.models import User
 from .models import *
 from django import forms
@@ -34,11 +34,14 @@ class CoolingAndPowerInfoForm(forms.ModelForm):
         model = CoolingAndPowerInfo
         fields = '__all__'
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class CustomerInformationForm(forms.ModelForm):
     class Meta:
         model = CustomerInformation
         fields = '__all__'
+        widgets = {'date': DateInput()}
 
 
 class MountingPlaneForm(forms.ModelForm):
@@ -119,7 +122,7 @@ class CustomerForm(forms.ModelForm):
         fields = '__all__'
 
 
-class GeneralComment(forms.ModelForm):
+class GeneralCommentForm(forms.ModelForm):
     class Meta:
         model = GeneralComment
-        fields = '__all__'
+        fields = ('comment',)

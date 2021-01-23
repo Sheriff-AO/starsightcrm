@@ -1,13 +1,62 @@
-{% extends "base.html" %} {% load i18n %} {% block content %}
+{% extends "base.html" %} {% load i18n %} {% load bootstrap4 %} {% bootstrap_messages %} {% block content %}
 <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
-<form action="" method="post">
-    {% csrf_token %}
-    <table>
-        {{ wizard.management_form }} {% if wizard.form.forms %} {{ wizard.form.management_form }} {% for form in wizard.form.forms %} {{ form }} {% endfor %} {% else %} {{ wizard.form }} {% endif %}
-    </table>
-    {% if wizard.steps.prev %}
-    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
-    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button> {% endif %}
-    <input type="submit" value="{% trans 'submit' %}" />
-</form>
+<div class="col-md-6 col-lg">
+    <div class="msg">
+        {% if wizard.steps.index == 0 %}
+        <h3>Customer's Information</h3>
+        {% elif wizard.steps.index == 1 %}
+        <h3>Customer's Cooling Information <strong>Air Conditioners</strong></h3>
+        {% elif wizard.steps.index == 2 %}
+        <h3>Indicate Suitable Mounting Planes for Solar Panels</h3>
+        {% elif wizard.steps.index == 3 %}
+        <h3><strong>Lighting Details</strong></h3> <br>
+        <h3>Indicate the Quantity and the Wattage for each</h3>
+        {% elif wizard.steps.index == 4 %}
+        <h3><strong>Other Electrical Appliances</strong></h3>
+        {% elif wizard.steps.index == 5 %}
+        <h3><strong>Which of the following applies to this facility with regards to energy?</strong></h3>
+        {% elif wizard.steps.index == 6 %}
+        <h3><strong>Generator and Transformer Details</strong></h3>
+        {% elif wizard.steps.index == 7 %}
+        <h3><strong>Do you have any critical load (equipment that must be on 24/7) installed in this facility?</strong></h3><br>
+        <h4>(if yes, please fill out details below)</h4>
+        {% elif wizard.steps.index == 8 %}
+        <h3><strong>Inverter/UPS/Battery Details</strong></h3><br>
+        <h4>State the Quantity & Capacity for each equipment type below</h4>
+        {% elif wizard.steps.index == 9 %}
+        <h3><strong>Operation Hours & Days</strong></h3>
+        {% elif wizard.steps.index == 10 %}
+        <h3><strong>Proposed Starsight Equipment Room</strong></h3>
+        {% elif wizard.steps.index == 11 %}
+        <h3><strong>Nature of the Building</strong>(choose as appropriate)</h3><br>
+        <h4><strong>Upload a clear picture of the building and the roof</strong></h4>
+        {% elif wizard.steps.index == 12 %}
+        <h3><strong>Roof Information</strong></h3>
+        {% elif wizard.steps.index == 13 %}
+        <h3><strong>Sign Off:</strong></h3><br>
+        <h4>STARSIGHT REPRESENTATIVE</h4>
+        {% elif wizard.steps.index == 14 %}
+        <h4>CUSTOMER REPRESENTATIVE</h4>
+        {% elif wizard.steps.index == 15 %}
+        <h4>GENERAL COMMENT</h4>
+        {% endif %}
+    </div>
+</div>
+
+<div class="col-md-6">
+    <form class="submission-form" action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{ wizard.management_form }} {% if wizard.form.forms %} {{ wizard.form.management_form }} {% for form in wizard.form.forms %} {% bootstrap_form form %} {% endfor %} {% else %} {% bootstrap_form wizard.form %} {% endif %}
+        </table>
+        {% if wizard.steps.prev %}
+        <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">
+      {% trans "first step" %}
+    </button>
+        <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">
+      {% trans "prev step" %}
+    </button> {% endif %}
+        <input class="btn btn-primary" type="submit" value="{% trans 'submit' %}" />
+    </form>
+</div>
 {% endblock %}

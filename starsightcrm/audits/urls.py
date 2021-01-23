@@ -24,12 +24,6 @@ urlpatterns = [
     path('update-vendor/<int:pk>/', views.updateVendor, name='update-vendor'),
     path('delete-vendor/<int:pk>/', views.deleteVendor, name='delete-vendor'),
     path('site-schedule/', views.siteSchedule, name='create-schedule'),
-    path('checklist/', ChecklistWizardView.as_view(
-        [
-            CustomerInformationForm, CoolingAndPowerInfoForm, MountingPlaneForm, LightingForm, ApplianceForm, EPowerSourceForm,
-            GeneratorForm, CriticalLoadForm, InverterBatteryForm, OperationHourForm, EquipmentRoomForm, BuildingForm,
-            RoofInfoForm, StarsightForm, CustomerForm, GeneralComment,
-        ]
-    )),
+    path('checklist/', ChecklistWizardView.as_view(), name='checklist'),
 
 ]

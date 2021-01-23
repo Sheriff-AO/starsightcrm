@@ -253,15 +253,54 @@ class ChecklistWizardView(SessionWizardView):
     form_list = [
         CustomerInformationForm, CoolingAndPowerInfoForm,  MountingPlaneForm, LightingForm, ApplianceForm, EPowerSourceForm,
         GeneratorForm, CriticalLoadForm, InverterBatteryForm, OperationHourForm, EquipmentRoomForm, BuildingForm,
-        RoofInfoForm, StarsightForm, CustomerForm, GeneralComment,
+        RoofInfoForm, StarsightForm, CustomerForm, GeneralCommentForm,
     ]
+
     file_storage = FileSystemStorage(
         location=os.path.join(settings.MEDIA_ROOT, 'photos'))
+    
 
-    def done(self, form_list, **kwargs):
-        return render(self.request, 'audits/done.html', {
-            'form_data': [form.cleaned_data for form in form_list],
-        })
+    def done(self, form_list, form_dict, **kwargs):
+        customer_info = form_dict['0'].save()
+        cooling_and_power = form_dict['1'].save()
+        mounting_plane = form_dict['2'].save()
+        lighting = form_dict['3'].save()
+        appliance = form_dict['4'].save()
+        e_power_source = form_dict['5'].save()
+        generator = form_dict['6'].save()
+        critical_load = form_dict['7'].save()
+        inverter_battery = form_dict['8'].save()
+        operation_hour = form_dict['9'].save()
+        equipment_room = form_dict['10'].save()
+        building = form_dict['11'].save()
+        roof_info = form_dict['12'].save()
+        starsight = form_dict['13'].save()
+        customer = form_dict['14'].save()
+        general_comment = form_dict['15'].save()
+        
+       # Creating Checklist object
+        Checklist.objects.create(
+            customer_information=customer_info,
+            cooling_and_power_information=cooling_and_power,
+            mounting_plane=mounting_plane,
+            lighting=lighting,
+            appliance=appliance,
+            e_power_source=e_power_source,
+            generator=generator,
+            critical_load=critical_load,
+            inverter_battery=inverter_battery,
+            operation_hour=operation_hour,
+            equipment_room=equipment_room,
+            building=building,
+            roof_info=roof_info,
+            starsight=starsight,
+            customer=customer,
+            general_comment=general_comment  
+            )
+
+        return redirect('audits:checklist')
+        
+
 
     def get(self, request, *args, **kwargs):
         try:

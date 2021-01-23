@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'import_export',
     'widget_tweaks',
     'formtools',
+    'bootstrap4',
 ]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
