@@ -298,7 +298,7 @@ class ChecklistWizardView(SessionWizardView):
             general_comment=general_comment  
             )
 
-        return redirect('audits:checklist')
+        return redirect('audits:vendor')
         
 
 
