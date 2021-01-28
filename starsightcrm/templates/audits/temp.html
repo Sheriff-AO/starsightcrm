@@ -47,7 +47,8 @@
     <form class="submission-form" action="" method="post">
         {% csrf_token %}
         <table>
-            {{ wizard.management_form }} {% if wizard.form.forms %} {{ wizard.form.management_form }} {% for form in wizard.form.forms %} {% bootstrap_form form %} {% endfor %} {% else %} {% bootstrap_form wizard.form %} {% endif %}
+            {{ wizard.management_form }} {% if wizard.form.forms %} {{ wizard.form.management_form }} {% for form in wizard.form.forms %} {% bootstrap_form form %} {% endfor %} {% else %}
+            <p><strong>{% bootstrap_form wizard.form %}</strong></p> {% endif %}
         </table>
         {% if wizard.steps.prev %}
         <button class="btn btn-primary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">
