@@ -44,7 +44,7 @@
 </div>
 
 <div class="col-md-6">
-    <form class="submission-form" action="" method="post">
+    <form class="submission-form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
             {{ wizard.management_form }} {% if wizard.form.forms %} {{ wizard.form.management_form }} {% for form in wizard.form.forms %} {% bootstrap_form form %} {% endfor %} {% else %}

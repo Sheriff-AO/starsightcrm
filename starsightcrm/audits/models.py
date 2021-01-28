@@ -207,9 +207,9 @@ class Building(models.Model):
     three_storey = models.BooleanField(default=False)
     others = models.BooleanField(default=False)
     building_picture = models.ImageField(
-        default='default1.jpg',  upload_to='building_pics')
+        default='default1.jpg',  upload_to='building_pics/')
     roof_picture = models.ImageField(
-        default='default2.jpg', upload_to='roof_pics')
+        default='default2.jpg', upload_to='roof_pics/')
 
 
 class RoofInfo(models.Model):
